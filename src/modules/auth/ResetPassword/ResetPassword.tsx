@@ -1,12 +1,16 @@
-import { useResetPasswordMutation } from '@/services/generated/graphql';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { Button, TextField } from '@mui/material';
+import routes from 'config/routes';
+import useTranslation from 'next-translate/useTranslation';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { useResetPasswordMutation } from 'services/generated/graphql';
 import styles from '../Signup/Signup.module.css';
 
 export default function ResetPassword() {
+  const { t } = useTranslation('common');
+
   // Input Variables: updated by user input
   const [pwd, setPwd] = useState('');
   const [confirmPwd, setConfirmPwd] = useState('');
@@ -97,7 +101,7 @@ export default function ResetPassword() {
     if (data) {
       // TODO : redirect user to his homepage
       return (
-        <Link href={login_url} passHref>
+        <Link href={routes.ACCOUNT_LOGIN} passHref>
           <Button
             className={styles.inscription_button}
             variant="outlined"
