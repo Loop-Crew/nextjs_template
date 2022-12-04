@@ -1,7 +1,7 @@
-import { useAskResetPasswordUserMutation } from '@/services/generated/graphql';
 import { Button, TextField } from '@mui/material';
 import useTranslation from 'next-translate/useTranslation';
 import { useState } from 'react';
+import { useAskResetPasswordUserMutation } from 'services/generated/graphql';
 import styles from '../Signup/Signup.module.css';
 
 export default function Signin() {
