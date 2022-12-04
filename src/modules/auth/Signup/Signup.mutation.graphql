@@ -1,0 +1,28 @@
+mutation createUser(
+  $address: String!
+  $city: String!
+  $company_name: String!
+  $country: String!
+  $email: String!
+  $password: String!
+  $phone: String!
+  $siret: String
+  $zip: String!
+) {
+  createUser(
+    create_user_input: {
+      address: $address
+      city: $city
+      company_name: $company_name
+      country: $country
+      email: $email
+      password: $password
+      phone: $phone
+      siret: $siret
+      zip: $zip
+    }
+  ) {
+    email
+    _id
+  }
+}

@@ -1,0 +1,14 @@
+.form {
+  margin-top: var(--bigSpace);
+}
+
+.button {
+  margin-top: var(--bigSpace);
+}
+
+.hidden {
+  display: none;
+}
+.alert {
+  margin-top: var(--commonSpace);
+}

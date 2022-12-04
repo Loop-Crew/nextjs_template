@@ -1,0 +1,336 @@
+# THIS FILE IS GENERATED; DO NOT EDIT
+input AddOrUpdateDiscountInput {
+  DF_price: Float!
+  catalog_id: ID!
+  price_list_id: ID!
+  product_id: ID!
+}
+
+type AddOrUpdateDiscountResponse {
+  price_list_id: ID!
+  product: Product!
+}
+
+input AddProductInput {
+  DF_price: Float!
+  customization_descriptions: [CustomizationDescriptionInput!]
+  name: String!
+  tax_percent: Float!
+}
+
+input AskResetPasswordUserInput {
+  email: String!
+}
+
+type AskResetPasswordUserResponse {
+  success: Boolean!
+}
+
+type Catalog {
+  _id: ID!
+  name: String
+  products: [Product!]!
+}
+
+input CreatePriceListInput {
+  name: String!
+}
+
+type CreatePriceListResponse {
+  price_list: PriceList!
+}
+
+input CreateUserInput {
+  address: String!
+  city: String!
+  company_name: String!
+  country: String!
+  email: String!
+  password: String!
+  phone: String!
+  siret: String
+  zip: String!
+}
+
+input Customization {
+  name: String!
+  value: String!
+}
+
+type CustomizationDescription {
+  max_length: Int
+  min_length: Int
+  name: String!
+  type: CustomizationDescriptionType!
+  values: [String!]
+}
+
+input CustomizationDescriptionInput {
+  max_length: Int
+  min_length: Int
+  name: String!
+  type: CustomizationDescriptionType!
+  values: [String!]
+}
+
+enum CustomizationDescriptionType {
+  CHOICE_LIST
+  FREE_FIELD
+}
+
+"""
+Date custom scalar type
+"""
+scalar Date
+
+input DeleteDiscountInput {
+  catalog_id: ID!
+  price_list_id: ID!
+  product_id: ID!
+}
+
+type DeleteDiscountResponse {
+  price_list_id: ID!
+  product: Product!
+}
+
+input DeletePriceListInput {
+  price_list_id: ID!
+}
+
+type DeletePriceListResponse {
+  price_list_id: ID!
+  success: Boolean!
+}
+
+input DeleteProductInput {
+  _id: ID!
+}
+
+type DeleteProductResponse {
+  product: Product!
+}
+
+input GenerateOrderFormInput {
+  buyer_address: String!
+  buyer_city: String!
+  buyer_company_name: String!
+  buyer_country: String!
+  buyer_email: String!
+  buyer_phone: String!
+  buyer_siret: String
+  buyer_zip: String!
+  catalog_id: ID!
+  ordered_products: [OrderedProductInput!]!
+}
+
+type GenerateOrderFormResponse {
+  success: Boolean!
+}
+
+input GetCatalogInput {
+  _id: ID!
+  price_list_id: ID
+}
+
+type GetCatalogResponse {
+  catalog: Catalog!
+  sellor_company_name: String!
+}
+
+type LoginResponse {
+  access_token: String!
+  user: User!
+}
+
+input LoginUserInput {
+  email: String!
+  password: String!
+}
+
+type Mutation {
+  addOrUpdateDiscount(
+    add_or_update_discount_input: AddOrUpdateDiscountInput!
+  ): AddOrUpdateDiscountResponse!
+  addProduct(add_product_input: AddProductInput!): Product!
+  askResetPasswordUser(
+    ask_reset_password_user_input: AskResetPasswordUserInput!
+  ): AskResetPasswordUserResponse!
+  createPriceList(
+    create_price_list_input: CreatePriceListInput!
+  ): CreatePriceListResponse!
+  createUser(create_user_input: CreateUserInput!): User!
+  deleteDiscount(
+    delete_discount_input: DeleteDiscountInput!
+  ): DeleteDiscountResponse!
+  deletePriceList(
+    delete_price_list_input: DeletePriceListInput!
+  ): DeletePriceListResponse!
+  deleteProduct(
+    delete_product_input: DeleteProductInput!
+  ): DeleteProductResponse!
+  generateOrderForm(
+    generate_order_form_input: GenerateOrderFormInput!
+  ): GenerateOrderFormResponse!
+  login(login_user_input: LoginUserInput!): LoginResponse!
+  order(order_input: OrderInput!): OrderResponse!
+  resetPasswordUser(reset_password_user_input: ResetPasswordUserInput!): User!
+  updateOrder(update_order_input: UpdateOrderInput!): UpdateOrderResponse!
+  updateProduct(update_product_input: UpdateProductInput!): Product!
+  updateUser(update_user_input: UpdateUserInput!): User!
+  verifyEmail(verify_email_input: VerifyEmailInput!): VerifyEmailResponse!
+  verifyNewEmail(verify_new_email_input: VerifyNewEmailInput!): User!
+}
+
+type Order {
+  _id: ID!
+  buyer_address: String!
+  buyer_city: String!
+  buyer_company_name: String!
+  buyer_country: String!
+  buyer_email: String!
+  buyer_phone: String!
+  buyer_siret: String
+  buyer_zip: String!
+  order_status: OrderStatus!
+  ordered_date: Date!
+  ordered_products: [OrderedProduct!]!
+  price_list_name: String
+}
+
+input OrderInput {
+  buyer_address: String!
+  buyer_city: String!
+  buyer_company_name: String!
+  buyer_country: String!
+  buyer_email: String!
+  buyer_phone: String!
+  buyer_siret: String
+  buyer_zip: String!
+  catalog_id: ID!
+  ordered_products: [OrderedProductInput!]!
+  price_list_id: ID
+}
+
+type OrderResponse {
+  success: Boolean!
+}
+
+enum OrderStatus {
+  DONE
+  INPROGRESS
+  PAID
+  REFUSED
+  SENT
+  TODO
+}
+
+type OrderedCustomization {
+  name: String!
+  value: String!
+}
+
+type OrderedProduct {
+  DF_price: Float!
+  DF_price_discount: Float
+  IT_price: Float!
+  IT_price_discount: Float
+  name: String!
+  ordered_customizations: [OrderedCustomization!]!
+  quantity: Int!
+  tax_percent: Float!
+}
+
+input OrderedProductInput {
+  customizations: [Customization!]!
+  product_id: ID!
+  quantity: Int!
+}
+
+type PriceList {
+  _id: ID!
+  name: String!
+  products: [Product!]!
+}
+
+type Product {
+  DF_price: Float!
+  DF_price_discount: Float
+  IT_price: Float!
+  IT_price_discount: Float
+  _id: ID!
+  customization_descriptions: [CustomizationDescription!]!
+  name: String!
+  tax_percent: Float!
+}
+
+type Query {
+  getCatalog(get_catalog_input: GetCatalogInput!): GetCatalogResponse!
+  myUser: User!
+}
+
+input ResetPasswordUserInput {
+  new_password: String!
+  token: String!
+  user_id: ID!
+}
+
+input UpdateOrderInput {
+  _id: ID!
+  order_status: OrderStatus
+}
+
+type UpdateOrderResponse {
+  order: Order!
+}
+
+input UpdateProductInput {
+  DF_price: Float
+  _id: ID!
+  customization_descriptions: [CustomizationDescriptionInput!]
+  name: String
+  tax_percent: Float
+}
+
+input UpdateUserInput {
+  address: String
+  city: String
+  company_name: String
+  country: String
+  new_email: String
+  password: String
+  phone: String
+  siret: String
+  zip: String
+}
+
+type User {
+  _id: ID!
+  address: String!
+  catalog: Catalog!
+  city: String!
+  company_name: String!
+  country: String!
+  days_countdown: Int!
+  email: String!
+  orders: [Order!]!
+  phone: String!
+  price_lists: [PriceList!]!
+  siret: String
+  subscriptionStatus: String
+  zip: String!
+}
+
+input VerifyEmailInput {
+  token: String!
+  user_id: ID!
+}
+
+type VerifyEmailResponse {
+  success: Boolean!
+}
+
+input VerifyNewEmailInput {
+  token: String!
+  user_id: ID!
+}

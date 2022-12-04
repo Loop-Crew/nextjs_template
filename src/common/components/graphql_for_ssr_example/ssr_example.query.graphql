@@ -1,0 +1,23 @@
+query getPriceLists {
+  myUser {
+    _id
+    catalog {
+      _id
+      products {
+        _id
+        name
+        DF_price
+      }
+    }
+    price_lists {
+      _id
+      name
+      products {
+        _id
+        name
+        DF_price
+        DF_price_discount
+      }
+    }
+  }
+}

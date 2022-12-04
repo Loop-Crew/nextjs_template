@@ -2,33 +2,69 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+First, select the good node version:
 
 ```bash
-npm run dev
-# or
+nvm use
+```
+
+Install the dependancies :
+
+```bash
+yarn install
+```
+
+Start the server
+
+```bash
 yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Folder structure
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+`src` : the main folder where you should put your code
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- `common` : contains code that is used all over the app
+  - `components` contains **stateless** reusable components, part of the UI Kit
+  - `types` contains typescript reusable types
+- ` modules` : contains code specific to business implementation. should contain subfolder grouping specific business logic (like auth, ...)
+- `lib` contains specific library implementation
+- `config` contains configuration files
+- `pages` contains the application routes
+- `services` contains the graphql query / mutation hooks and typescript types from the API
 
-## Learn More
+most likely, you will code new features inside the "modules" folder.
+This modules can call stateless reusable components, located inside `common/components`.
+When you are done writing your module, you can add it to a page by creating the corresponding file into `pages`
 
-To learn more about Next.js, take a look at the following resources:
+## Using Codegen
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Codegen is a tool that automatically create graphql hooks based on the graphql api schema.
+When you want to use a new query or mutation, write your graphql in a .graphql file (in components or modules),
+run `yarn codegen`, and you can then import your React hook in the file you want.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+To use, you need to know your graphql api url : if its local, should be something like 'http://localhost:8080/graphql'
 
-## Deploy on Vercel
+Append this url in your `codegen.yml` file, next to schema :
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bashrc
+schema: http://127.0.0.1:8080/graphql
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+The code is then written in services/generated
+
+## Using storybook
+
+Storybook allow you to develop and test UI Component in isolation from the rest of the app.
+
+You can see an implementation example in `common/components/stories`
+
+To start storybook, run `yarn storybook`
+
+When you need to create a new component, you can just copy paste the `components/templates/base` structure, and replace the name BaseTemplate with your component name. This would allow you to have the Storybook structure already built
+
+## Write
+
+## Branch and commits

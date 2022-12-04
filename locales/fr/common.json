@@ -1,0 +1,7 @@
+{
+  "title": "Hello world",
+  "variable-example": "Using a variable {{count}}",
+  "new-year": {
+    "hey": "45"
+  }
+}

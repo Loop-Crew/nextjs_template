@@ -1,0 +1,43 @@
+overwrite: true
+schema: 'http://127.0.0.1:8080/graphql'
+documents:
+  - 'src/common/**/*.graphql'
+  - 'src/modules/**/*.graphql'
+generates:
+  src/services/generated/graphql.tsx:
+    plugins:
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-react-apollo'
+      - add:
+          content:
+            ['/* eslint-disable */', '// THIS FILE IS GENERATED; DO NOT EDIT']
+    config:
+      reactApolloVersion: 3
+      withHooks: true
+  src/services/generated/schema.graphql:
+    plugins:
+      - 'schema-ast'
+      - add:
+          content: '# THIS FILE IS GENERATED; DO NOT EDIT'
+  src/services/generated/page.tsx:
+    plugins:
+      - 'graphql-codegen-apollo-next-ssr'
+      - add:
+          content:
+            ['/* eslint-disable */', '// THIS FILE IS GENERATED; DO NOT EDIT']
+    config:
+      documentMode: external
+      importDocumentNodeExternallyFrom: ./graphql
+      reactApolloVersion: 3
+      withHooks: true
+      contextType: 'ApolloClientContext'
+      contextTypeRequired: true
+      apolloClientInstanceImport: 'lib/apollo/withApollo'
+    preset: import-types
+    presetConfig:
+      typesPath: ./graphql
+
+hooks:
+  afterAllFileWrite:
+    - prettier --write
