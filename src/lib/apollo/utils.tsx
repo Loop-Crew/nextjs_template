@@ -33,8 +33,9 @@ export const httpLink = createHttpLink({
 // });
 
 // https://github.com/apollographql/apollo-client/blob/main/docs/source/networking/authentication.mdx
-export const authLink = (ctx: ApolloClientContext) =>
+export const authLink = (ctx: ApolloClientContext | undefined) =>
   setContext(async (_, { headers }) => {
+    if (!ctx) return headers;
     try {
       // Retrieve cookies
       const cookies = isServerRenderCtx(ctx)

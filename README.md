@@ -22,6 +22,31 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Apollo Client
+
+This projet use Apollo Client. Based on your needs, you can either use Server Side Rendering, Client Side Rendering, Static Site Generation, or a mixt of Client Side Rendering and Static Site Generation.
+
+**Client Side Rendering** is the default behaviour. Use it when data changes quite often and you want the user to see the page as fast as possible, even without data. You can then load data in the client and implement skeleton loaders while data is fetching.
+
+For **Server Side Rendering**, you have to do your queries inside a getServerSideProps method. Use it for front pages where SEO matters and data changes quite often. It will be slower than CSR but can be usefull for SEO.
+
+For **Static Site Generation**, you have to do your queries inside a getStaticProps method. It gets data and generate static (html) files during Build. Use it for data that don't change often, where you don't need user input (for front pages mostly, where no connexion is needed).
+You can also implement **Incremental Site Regeneration**, where the site is rebuilt every X hour to take changes into account. This is the best setup for CMS like pages.
+
+You can get more informations on how to implement each of theses [here](https://developers.wpengine.com/blog/apollo-client-cache-rehydration-in-next-js)
+
+### Apollo implementation choices
+
+There is a few different Apollo implementation possible for server side rendering:
+
+- fetch data in the page (server side), pass it as props for the page, and use it in all sub-components. Then send the result to the client. In sub components, get data from props.
+
+- fetch data in the page (server-side), pass it to cache, Then send it to the client. In the sub-components, get data from query hooks just like in CSR. The apollo queries will just get data from cache instead of refetching data.
+
+The second method was prefered for this project: we don't populate the page props with our fetched data, we just pass the apollo cache. It allows us to use queries in our components (instead of just having queries in pages). If we have components shared by two different pages, it will just use the cache instead of having to do a call for every page.
+
+More info [on this here](https://stackoverflow.com/questions/67116297/passing-as-props-vs-extracting-cache-apollo-client-nextjs)
+
 ## Folder structure
 
 `src` : the main folder where you should put your code
@@ -64,7 +89,3 @@ You can see an implementation example in `common/components/stories`
 To start storybook, run `yarn storybook`
 
 When you need to create a new component, you can just copy paste the `components/templates/base` structure, and replace the name BaseTemplate with your component name. This would allow you to have the Storybook structure already built
-
-## Write
-
-## Branch and commits

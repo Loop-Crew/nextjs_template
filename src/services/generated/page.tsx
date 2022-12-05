@@ -3,7 +3,6 @@
 import * as Types from './graphql';
 
 import * as Operations from './graphql';
-import { NextPage } from 'next';
 import { NextRouter, useRouter } from 'next/router';
 import { QueryHookOptions, useQuery } from '@apollo/client';
 import * as Apollo from '@apollo/client';
@@ -27,7 +26,7 @@ export async function getServerPageGetPriceLists(
 
   return {
     props: {
-      apolloState: apolloState,
+      __APOLLO_STATE__: apolloState,
       data: data?.data,
       error: data?.error ?? data?.errors ?? null,
     },
@@ -49,24 +48,8 @@ export type PageGetPriceListsComp = React.FC<{
   data?: Types.GetPriceListsQuery;
   error?: Apollo.ApolloError;
 }>;
-export const withPageGetPriceLists =
-  (
-    optionsFunc?: (
-      router: NextRouter
-    ) => QueryHookOptions<
-      Types.GetPriceListsQuery,
-      Types.GetPriceListsQueryVariables
-    >
-  ) =>
-  (WrappedComponent: PageGetPriceListsComp): NextPage =>
-  (props) => {
-    const router = useRouter();
-    const options = optionsFunc ? optionsFunc(router) : {};
-    const { data, error } = useQuery(Operations.GetPriceListsDocument, options);
-    return <WrappedComponent {...props} data={data} error={error} />;
-  };
 export const ssrGetPriceLists = {
   getServerPage: getServerPageGetPriceLists,
-  withPage: withPageGetPriceLists,
+
   usePage: useGetPriceLists,
 };

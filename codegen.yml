@@ -32,7 +32,9 @@ generates:
       reactApolloVersion: 3
       withHooks: true
       contextType: 'ApolloClientContext'
-      contextTypeRequired: true
+      contextTypeRequired: true,
+      apolloStateKey: '__APOLLO_STATE__'
+      withHOC: false
       apolloClientInstanceImport: 'lib/apollo/withApollo'
     preset: import-types
     presetConfig:

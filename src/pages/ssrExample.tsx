@@ -1,4 +1,4 @@
-import { withApollo } from 'lib/apollo/withApollo';
+import { withApollo } from '@/lib/apollo/withApollo';
 import { GetServerSideProps } from 'next';
 import {
   PageGetPriceListsComp,

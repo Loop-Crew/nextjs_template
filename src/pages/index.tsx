@@ -1,4 +1,5 @@
-import { withApollo } from 'lib/apollo/withApollo';
+import { withApollo } from '@/lib/apollo/withApollo';
+import { GetStaticProps } from 'next';
 import Head from 'next/head';
 
 const Home = () => {
@@ -11,6 +12,9 @@ const Home = () => {
       </Head>
     </div>
   );
+};
+export const getStaticProps: GetStaticProps = async () => {
+  return { props: {} };
 };
 
 export default withApollo(Home);
