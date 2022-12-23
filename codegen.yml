@@ -2,7 +2,7 @@ overwrite: true
 schema: 'http://127.0.0.1:8080/graphql'
 documents:
   - 'src/common/**/*.graphql'
-  - 'src/modules/**/*.graphql'
+  - 'src/features/**/*.graphql'
 generates:
   src/services/generated/graphql.tsx:
     plugins:

@@ -1,5 +1,5 @@
 import { withApollo } from '@/lib/apollo/withApollo';
-import Login from 'modules/auth/Login/Login';
+import Login from 'features/auth/Login/Login';
 import { GetStaticProps } from 'next';
 
 export const getStaticProps: GetStaticProps = async () => {

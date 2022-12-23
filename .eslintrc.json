@@ -11,7 +11,7 @@
     {
       //"files": ["*.ts", "*.tsx"], // TypeScript files extension
       "files": [
-        "src/{common,pages,modules}/**/*.{ts,tsx}",
+        "src/{common,pages,features}/**/*.{ts,tsx}",
         "*.stories.@(ts|tsx|js|jsx|mjs|cjs)"
       ],
 
